@@ -1,58 +1,63 @@
-# 🛍️ LeafCart : Grocery Website (Full-Stack)
+
+# 🛍️ LeafCart : Grocery Website
 
 A modern seller dashboard built with React and Tailwind CSS — manage products, track orders, and monitor store activity.
 
 ⚠️ Note: Backend is currently in development. This frontend is powered by dummy data for now.
 
-
 <p align="center">
   <img src="https://github.com/Prodipsen27/grocery-app/blob/main/client/Leafcart.png" width="700"/>
 </p>
 
-### 🌐 Live Demo
+---
 
-👉 [Live Demo on Render](https://leafcart.netlify.app/)
+## 🌐 Live Demo
+
+👉 [Live Demo](https://leafcart.netlify.app/)
+
 ---
 
 ## ✨ Features
 
-* Seller login and session state handling
-* Add Product & Product List pages (UI)
-* View orders with buyer info & payment status
-* Responsive layout using Tailwind CSS
-* Global state via Context API
-* Dummy order data for frontend preview
+* 🛒 Seller login and session handling (dummy login)
+* 📦 Add Product & Product List UI pages
+* 📋 Order view with buyer details and payment status
+* 📱 Fully responsive layout using Tailwind CSS
+* 🧠 Context API for global state management
+* 🧪 Dummy order data for frontend preview
 
 ---
 
-## 🚀 Stack
+## 🚀 Tech Stack
 
-* React (Vite)
-* Tailwind CSS
-* React Router v6
-* Context API (AppContext)
-* Assets & dummy data (temporary placeholders)
-
----
-
-## 📁 Project Structure
-
-src
-├── assets/     # Icons, dummy data, static files
-├── components/  # Reusable UI components (if any)
-├── context/    # App-wide context (AppContext)
-├── pages/      # Seller pages: Login, Orders, etc.
-└── main.jsx    # App entry point
+* ⚛️ React (Vite)
+* 🎨 Tailwind CSS
+* 🔁 React Router v6
+* 📦 Context API (AppContext)
+* 🧾 Dummy data (assets/dummyOrders.js)
 
 ---
 
-## 🧪 Local Setup
+## 📁 Folder Structure
+
+```
+src/
+├── assets/         # Icons, images, and dummy data
+├── components/     # Reusable components
+├── context/        # AppContext for global state
+├── pages/          # Login, Orders, and other seller pages
+└── main.jsx        # App entry point
+```
+
+---
+
+## 🧪 Local Development
 
 Clone the repo:
 
 ```bash
-git clone https://github.com/your-username/leafcart-seller.git
-cd leafcart-seller
+git clone https://github.com/Prodipsen27/grocery-app.git
+cd grocery-app
 ```
 
 Install dependencies:
@@ -61,13 +66,13 @@ Install dependencies:
 npm install
 ```
 
-Start the dev server:
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open in browser:
+Visit:
 
 ```
 http://localhost:5173
@@ -75,28 +80,38 @@ http://localhost:5173
 
 ---
 
-## 🚧 Backend
+## 🛠 Backend Status
 
-* Backend APIs are currently being developed
-* Temporary data is loaded from dummyOrders in assets
-* Will support product creation, order management, and authentication soon
+* 🔧 Backend APIs are in progress
+* 🗂 Currently using static dummyOrders for simulation
+* 🔐 Authentication and product CRUD will be supported soon
 
 ---
 
 ## 🤝 Contributing
 
-Feel free to fork the repo and open a PR for suggestions, cleanup, or improvements. Backend contributions welcome!
+Have suggestions or want to contribute?
+
+* Fork the repo
+* Create a new branch
+* Submit a Pull Request
+
+Backend collaboration is also welcome!
 
 ---
 
-## 📌 Status
+## 📌 Project Status
 
-🟡 Frontend UI ready
-🔴 Backend APIs in development
-✅ Responsive and functional with dummy data
+* ✅ UI: Fully built with dummy data
+* 🟡 Backend: Under construction
+* 📱 Responsive: Yes
+* 🧪 Dummy Data Enabled: Yes
 
 ---
 
 ## 🧑‍💻 Author
 
-Made with 💚 by Prodip
+Built with 💚 by Prodip
+GitHub: [@Prodipsen27](https://github.com/Prodipsen27)
+
+---
