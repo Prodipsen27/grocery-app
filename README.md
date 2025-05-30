@@ -6,7 +6,7 @@ A modern seller dashboard built with React and Tailwind CSS — manage products,
 
 
 <p align="center">
-  <img src="https://github.com/Prodipsen27/grocery-app/client/Leafcart.png" width="700"/>
+  <img src="https://github.com/Prodipsen27/grocery-app/blob/main/client/Leafcart.png" width="700"/>
 </p>
 
 ### 🌐 Live Demo
