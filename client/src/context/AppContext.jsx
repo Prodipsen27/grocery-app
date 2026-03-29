@@ -56,22 +56,15 @@ const fetchSeller = async () => {
 const fetchUser = async () => {
   try {
     const { data } = await axios.get('/api/user/is-auth');
-
     if (data.success) {
       setUser(data.user);
-      cartLoadedFromServer.current = true; // mark: coming from server, skip sync
+      cartLoadedFromServer.current = true;
       setCartItems(data.user.cartItems || {});
-    }else{
-        toast.error(data.message)
     }
   } catch (error) {
     setUser(null);
-    // Don't clear DB cart — just clear the local state without triggering a sync
     cartLoadedFromServer.current = true;
     setCartItems({});
-    if (error.response?.status !== 401) {
-      toast.error(error.message);
-    }
   }
 };
 

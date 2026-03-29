@@ -13,6 +13,7 @@ import orderRouter from './routes/orderRoute.js';
 import agentRouter from './routes/agentRoute.js';
 
 const app= express();
+app.set('trust proxy', 1); // Trust Render's proxy for secure cookies
 
 const port = process.env.PORT || 4000;
 
