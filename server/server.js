@@ -30,7 +30,7 @@ await connectCloudinary();
 const allowedOrigins = [
     'http://localhost:5173', 
     'http://localhost:5174',
-    'https://leafcart-ivory.vercel.app/'// To be set to your Vercel URL
+    'https://leafcart-ivory.vercel.app'// To be set to your Vercel URL
 ];
 
 

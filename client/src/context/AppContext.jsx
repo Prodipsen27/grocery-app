@@ -147,13 +147,13 @@ const loadAgentHistory = async () => {
         if (data.success && data.history && data.history.length > 0) {
             setAgentMessages(data.history.filter(m => m.role === 'user' || m.role === 'model' || m.role === 'assistant'));
         } else {
-            setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy.ai, your personal grocery assistant. What are you planning to cook or buy today?" }]);
+            setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy, your personal grocery assistant. What are you planning to cook or buy today?" }]);
         }
     } catch (error) {
         if (error.response?.status !== 401) {
             console.error("Failed to load history", error);
         }
-        setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy.ai. (Session restored locally)" }]);
+        setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy. (Session restored locally)" }]);
     } finally {
         setAgentInitialLoading(false);
     }
@@ -220,7 +220,7 @@ const handleAgentSend = async (message) => {
 },[cartItems])
 
 
-    const value = {navigate, user, setUser, isSeller, setIsSeller,showLogout, setShowLogout,products, currency, addToCart,updateCartItems, removeFromCart, cartItems,showUserLogin , setShowUserLogin, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios: API, fetchProducts,fetchUser,setCartItems, clearCartLocal, agentMessages, setAgentMessages, agentInput, setAgentInput, agentLoading, agentInitialLoading, agentToolCalls, loadAgentHistory, handleAgentSend, isAgentDrawerOpen, setIsAgentDrawerOpen}
+    const value = {navigate, user, setUser, isSeller, setIsSeller,showLogout, setShowLogout,products, currency, addToCart,updateCartItems, removeFromCart, cartItems,showUserLogin , setShowUserLogin, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios: API, fetchProducts,fetchUser,setCartItems, clearCartLocal, agentMessages, setAgentMessages, agentInput, setAgentInput, agentLoading, agentInitialLoading, agentToolCalls, loadAgentHistory, handleAgentSend, isAgentDrawerOpen, setIsAgentDrawerOpen, fetchSeller}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>
