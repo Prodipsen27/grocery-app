@@ -11,6 +11,12 @@ export const placeOrderCOD = async (req, res) => {
       return res.json({ success: false, message: "Invalid data" });
     }
 
+    for (const item of items) {
+      if (!Number.isInteger(item.quantity) || item.quantity < 1) {
+        return res.json({ success: false, message: "Invalid quantity: must be a positive integer" });
+      }
+    }
+
     // Calculate Amount Using Items
     let amount = 0;
     for (const item of items) {
@@ -41,6 +47,12 @@ export const placeOrderStripe = async (req, res) => {
 
     if (!address || items.length === 0) {
       return res.json({ success: false, message: "Invalid data" });
+    }
+
+    for (const item of items) {
+      if (!Number.isInteger(item.quantity) || item.quantity < 1) {
+        return res.json({ success: false, message: "Invalid quantity: must be a positive integer" });
+      }
     }
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -115,10 +127,27 @@ export const placeOrderStripe = async (req, res) => {
 export const verifyStripePayment = async (req, res) => {
   try {
     const { orderId, success } = req.body;
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+        return res.json({ success: false, message: "Order not found" });
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
     if (success === "true") {
-      await Order.findByIdAndUpdate(orderId, { isPaid: true });
-      return res.json({ success: true, message: "Payment successful" });
+      if (!order.stripeSessionId) {
+          return res.json({ success: false, message: "Invalid session" });
+      }
+      
+      const session = await stripe.checkout.sessions.retrieve(order.stripeSessionId);
+
+      if (session.payment_status === 'paid') {
+          await Order.findByIdAndUpdate(orderId, { isPaid: true });
+          return res.json({ success: true, message: "Payment successful" });
+      } else {
+          return res.json({ success: false, message: "Payment not verified by Stripe" });
+      }
     } else {
       await Order.findByIdAndDelete(orderId);
       return res.json({ success: false, message: "Payment cancelled" });
