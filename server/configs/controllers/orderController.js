@@ -91,7 +91,7 @@ export const placeOrderStripe = async (req, res) => {
       quantity: 1,
     });
 
-    const origin = req.headers.origin || "http://localhost:5173";
+    const origin = req.headers.origin || "https://leafcart-ivory.vercel.app";
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
