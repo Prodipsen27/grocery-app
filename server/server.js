@@ -2,6 +2,8 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
 import connectDB from './configs/db.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import userRouter from './routes/userRoute.js';
 import sellerRouter from './routes/sellerRoute.js';
@@ -11,6 +13,9 @@ import cartRouter from './routes/cartRoute.js';
 import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import agentRouter from './routes/agentRoute.js';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.join(__dirname, '../client/dist');
 
 const app= express();
 app.set('trust proxy', 1); // Trust Render's proxy for secure cookies
@@ -49,6 +54,9 @@ app.get('/', (req, res)=> {
     res.send("LeafCart API is running");
 })
 
+// Serve Static Frontend
+app.use(express.static(clientDistPath));
+
 app.use('/api/user',userRouter)
 app.use('/api/seller',sellerRouter)
 app.use('/api/product',productRouter)
@@ -56,6 +64,11 @@ app.use('/api/cart',cartRouter)
 app.use('/api/address',addressRouter)
 app.use('/api/order',orderRouter)
 app.use('/api/agent',agentRouter)
+
+// Wildcard for React Router support
+app.get('(.*)', (req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+});
 app.listen(port, ()=>{
     console.log(`Server is running on ${port}`);
 })
