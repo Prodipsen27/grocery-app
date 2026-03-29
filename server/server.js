@@ -30,7 +30,7 @@ await connectCloudinary();
 const allowedOrigins = [
     'http://localhost:5173', 
     'http://localhost:5174',
-    'https://leafcart-ivory.vercel.app'// To be set to your Vercel URL
+    'https://leafcart-tan.vercel.app'// To be set to your Vercel URL
 ];
 
 
@@ -41,8 +41,7 @@ app.use(cors({
     origin: [
         'http://localhost:5173', 
         'http://localhost:5174', 
-        'https://leafcart-ivory.vercel.app',
-        'https://leafcart-frontend.vercel.app'
+        'https://leafcart-tan.vercel.app'
     ],
     credentials: true
 }));
