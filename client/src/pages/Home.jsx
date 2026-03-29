@@ -4,16 +4,15 @@ import Categories from '../components/Categories'
 import BestSeller from '../components/BestSeller'
 import BottomBanner from '../components/BottomBanner'
 import NewsLetter from '../components/NewsLetter'
-import Footer from '../components/Footer'
+
 const Home = () => {
   return (
-    <div className='mt-10'>
+    <div className='mt-16'>
       <Banner/>
       <Categories/>
       <BestSeller/>
       <BottomBanner/>
       <NewsLetter/>
-    
     </div>
   )
 }

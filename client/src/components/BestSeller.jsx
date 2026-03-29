@@ -6,13 +6,13 @@ const BestSeller = () => {
   const { products } = useAppContext();
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 mt-10">
+    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 mt-16">
       {/* Heading */}
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight border-l-4 border-indigo-600 pl-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight border-l-4 border-green-500 pl-4">
           Best Sellers
         </h2>
-        <p className="text-sm sm:text-base text-gray-500 mt-1 ml-4">
+        <p className="text-sm sm:text-base text-gray-500 mt-1 ml-5">
           Most popular products chosen by our customers
         </p>
       </div>

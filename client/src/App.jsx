@@ -17,25 +17,36 @@ import SellerLayout from './pages/seller/SellerLayout';
 import AddProduct from './pages/seller/AddProduct';
 import ProductList from './pages/seller/ProductList';
 import Orders from './pages/seller/Orders';
+import VerifyPayment from './pages/VerifyPayment';
+import Shop from './pages/Shop';
+import CategoriesPage from './pages/CategoriesPage';
+import Contact from './pages/Contact';
+import AgentDashboard from './pages/AgentDashboard';
+import AgentDrawer from './components/AgentDrawer';
 
 const App = () => {
-
-  const isSellerPath = useLocation().pathname.includes('seller');
-const {showUserLogin,isSeller}= useAppContext()
+  const location = useLocation();
+  const isSellerPath = location.pathname.includes('seller');
+  const {showUserLogin,isSeller}= useAppContext()
   return (
     <div className=''>
       {isSellerPath ? null: <Navbar />}
       {showUserLogin?<Login/>:null}
       <Toaster/>
-      <div className={`${!isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}> {/* Optional: to avoid navbar overlap */}
+      <div className={`${!isSellerPath ? "px-6 md:px-16 lg:px-24 xl:px-32 min-h-[80vh]" : ""}`}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<AllProducts />} />
           <Route path='/products/:category' element={<ProductCategory/>} />
           <Route path='/products/:category/:id' element={<ProductDetails/>} />
+          <Route path='/shop' element={<Shop/>} />
+          <Route path='/assistant' element={<AgentDashboard/>} />
+          <Route path='/categories' element={<CategoriesPage/>} />
+          <Route path='/contact' element={<Contact/>} />
           <Route path='/cart' element={<Cart/>} />
           <Route path='/add-address' element={<AddAddress/>} />
           <Route path='/my-orders' element={<MyOrders/>} />
+          <Route path='/verify-payment' element={<VerifyPayment/>} />
           <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
             <Route index element={isSeller ? <AddProduct/> : null}/>
             <Route index element={isSeller ? <AddProduct/> : null}/>
@@ -44,7 +55,8 @@ const {showUserLogin,isSeller}= useAppContext()
           </Route>
         </Routes>
       </div>
-      {!isSellerPath && <Footer/>}
+      <AgentDrawer />
+      {!isSellerPath && location.pathname !== '/assistant' && <Footer />}
     </div>
   );
 };

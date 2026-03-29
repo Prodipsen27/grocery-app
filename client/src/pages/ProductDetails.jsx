@@ -33,24 +33,23 @@ const ProductDetails = () => {
       <div className="pt-28 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb */}
-          <p className="text-sm text-gray-600 mb-4">
-            <Link to="/" className="hover:underline">
+          <p className="text-sm text-gray-500 mb-6 flex items-center flex-wrap gap-1">
+            <Link to="/" className="hover:text-green-600 transition">
               Home
-            </Link>{" "}
-            /
-            <Link to="/products" className="hover:underline">
-              {" "}
+            </Link>
+            <span className="text-gray-300">/</span>
+            <Link to="/products" className="hover:text-green-600 transition">
               Products
-            </Link>{" "}
-            /
+            </Link>
+            <span className="text-gray-300">/</span>
             <Link
               to={`/products/${product.category.toLowerCase()}`}
-              className="hover:underline"
+              className="hover:text-green-600 transition"
             >
-              {" "}
               {product.category}
-            </Link>{" "}
-            /<span className="text-green-600"> {product.name}</span>
+            </Link>
+            <span className="text-gray-300">/</span>
+            <span className="text-green-600 font-medium">{product.name}</span>
           </p>
 
           {/* Main Section */}
@@ -64,11 +63,11 @@ const ProductDetails = () => {
                     src={img}
                     alt={`thumb-${i}`}
                     onClick={() => setThumbnail(img)}
-                    className="w-20 h-20 object-cover border rounded-md cursor-pointer hover:ring-2 ring-green-400"
+                    className="w-20 h-20 object-cover border-2 border-transparent rounded-lg cursor-pointer hover:border-green-400 transition"
                   />
                 ))}
               </div>
-              <div className="flex-1 border rounded-lg overflow-hidden">
+              <div className="flex-1 border border-gray-200 rounded-2xl overflow-hidden bg-gradient-to-b from-green-50/30 to-white">
                 <img
                   src={thumbnail}
                   alt="Selected"
@@ -97,14 +96,14 @@ const ProductDetails = () => {
               </div>
 
               {/* Pricing */}
-              <div className="mt-6">
-                <p className="line-through text-gray-400">
+              <div className="mt-6 p-5 bg-green-50/50 rounded-xl border border-green-100">
+                <p className="line-through text-gray-400 text-sm">
                   MRP: {currency}{product.price}
                 </p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-3xl font-bold text-green-600 mt-1">
                   {currency}{product.offerPrice}
                 </p>
-                <span className="text-sm text-gray-500">
+                <span className="text-xs text-gray-500">
                   (inclusive of all taxes)
                 </span>
               </div>
@@ -121,7 +120,7 @@ const ProductDetails = () => {
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <button
                   onClick={() => addToCart(product._id)}
-                  className="w-full py-3 bg-gray-100 text-gray-800 font-semibold hover:bg-gray-200 rounded transition"
+                  className="w-full py-3.5 bg-white border-2 border-green-500 text-green-600 font-semibold hover:bg-green-50 rounded-xl transition cursor-pointer"
                 >
                   Add to Cart
                 </button>
@@ -130,7 +129,7 @@ const ProductDetails = () => {
                     addToCart(product._id);
                     navigate("/cart");
                   }}
-                  className="w-full py-3 bg-green-600 text-white font-semibold hover:bg-green-700 rounded transition"
+                  className="w-full py-3.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold hover:from-green-600 hover:to-emerald-700 rounded-xl transition shadow-lg shadow-green-200 cursor-pointer"
                 >
                   Buy Now
                 </button>
@@ -168,7 +167,7 @@ const ProductDetails = () => {
                 navigate("/products");
                 window.scrollTo(0, 0);
               }}
-              className="mx-auto block px-12 my-16 py-2.5 border rounded text-green-600 hover:bg-green-50 transition"
+              className="mx-auto block px-12 my-16 py-3 border-2 border-green-500 rounded-full text-green-600 font-medium hover:bg-green-500 hover:text-white transition cursor-pointer"
             >
               See more
             </button>

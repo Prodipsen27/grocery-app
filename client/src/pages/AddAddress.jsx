@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
+import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast'
 
 const InputField = ({ label, type, placeholder, name, handleChange, address }) => (
   <div className="flex flex-col gap-1">
@@ -17,6 +19,8 @@ const InputField = ({ label, type, placeholder, name, handleChange, address }) =
 )
 
 const AddAddress = () => {
+const {axios,user, navigate}= useAppContext();
+
   const [address, setAddress] = useState({
     firstName: '',
     lastName: '',
@@ -37,11 +41,27 @@ const AddAddress = () => {
     }))
   }
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault()
-    console.log('Submitted Address:', address)
-    // Add logic to save address
+  const onSubmitHandler = async (e) => {
+  e.preventDefault();
+  try {
+    const { data } = await axios.post('/api/address/add', { address });
+
+    if (data.success) {
+      toast.success(data.message);
+      navigate('/cart');
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    toast.error(error.message);
   }
+};
+
+useEffect(()=>{
+  if (!user) {
+    navigate('/cart')
+  }
+},[])
 
   return (
     <div className="mt-24 pb-16 px-6">

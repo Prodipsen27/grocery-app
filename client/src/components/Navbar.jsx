@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { assets } from "../assets/assets.js";
 import { Link } from "react-router-dom";
-import { Menu, X, Search, ShoppingCart } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, Bot } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
-
+import toast from "react-hot-toast";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -18,6 +18,9 @@ const Navbar = () => {
     setSearchQuery,
     searchQuery,
     getCartCount,
+    axios,
+    clearCartLocal,
+    agentLoading
   } = useAppContext();
 
   const navItems = [
@@ -28,10 +31,23 @@ const Navbar = () => {
     { label: "Contact", href: "/contact" },
   ];
 
-  const handleLogout = () => {
-    setUser(null);
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      const { data } = await axios.get('/api/user/logout');
+
+      if (data.success) {
+        toast.success(data.message);
+        setUser(null);
+        clearCartLocal(); // clear UI cart without overwriting DB
+        navigate('/');
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -47,26 +63,27 @@ const Navbar = () => {
     if (searchQuery.length > 0) {
       navigate("/products");
     }
-  }, [navigate, searchQuery]);
+  }, [searchQuery]);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 z-50 font-sans transition-all duration-300 ease-in-out">
+    <nav className="bg-white/95 backdrop-blur-md shadow-sm fixed w-full top-0 z-40 font-sans border-b border-gray-100 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-bold text-green-600 transition duration-300 ease-in-out hover:scale-110 transform"
+          className="text-2xl font-bold text-green-600 transition duration-300 ease-in-out hover:scale-105 transform"
         >
-          LeafCart
+          🍃 LeafCart
         </Link>
 
         {/* Search bar (desktop) */}
         <div className="hidden md:flex flex-1 mx-6 max-w-md relative">
           <input
             onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery}
             type="text"
             placeholder="Search products..."
-            className="w-full px-4 py-2 pl-10 pr-4 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ease-in-out"
+            className="w-full px-4 py-2.5 pl-10 pr-4 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-300 bg-gray-50/50 text-sm"
           />
           <Search
             size={20}
@@ -80,11 +97,28 @@ const Navbar = () => {
             <Link
               key={item.label}
               to={item.href}
+              onClick={() => setSearchQuery('')}
               className="text-gray-700 hover:text-green-600 transition duration-300 ease-in-out font-medium flex items-center transform hover:scale-110"
             >
               {item.label}
             </Link>
           ))}
+
+          {/* Assistant Button */}
+          <Link
+            to="/assistant"
+            className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F4C137] to-amber-400 text-amber-950 font-bold rounded-full hover:shadow-lg transition transform hover:-translate-y-0.5"
+            onClick={() => setSearchQuery('')}
+          >
+            <Bot size={18} />
+            <span className="text-sm">Leafy AI</span>
+            {agentLoading && (
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+            )}
+          </Link>
 
           {/* Cart Icon */}
           <Link to="/cart" className="relative">
@@ -172,6 +206,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search..."
+            value={searchQuery}
             className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -191,6 +226,21 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+
+          {/* Assistant Mobile */}
+          <Link
+            to="/assistant"
+            onClick={() => setOpen(false)}
+            className="relative flex items-center justify-center gap-2 w-full py-2 bg-gradient-to-r from-[#F4C137] to-amber-400 text-amber-950 font-bold rounded-full shadow-sm mt-2 mb-2"
+          >
+            <Bot size={18} /> Leafy AI
+            {agentLoading && (
+              <span className="absolute right-4 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 shadow-lg"></span>
+              </span>
+            )}
+          </Link>
 
           {!user ? (
             <button
