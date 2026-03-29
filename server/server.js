@@ -66,7 +66,7 @@ app.use('/api/order',orderRouter)
 app.use('/api/agent',agentRouter)
 
 // Wildcard for React Router support
-app.get('(.*)', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 app.listen(port, ()=>{
