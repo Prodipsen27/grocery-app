@@ -24,7 +24,9 @@ const MyOrders = () => {
         setMyOrders(data.orders);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response?.status !== 401) {
+        console.error("Failed to fetch orders:", error);
+      }
     }
   };
 

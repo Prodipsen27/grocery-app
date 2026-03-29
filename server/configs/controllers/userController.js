@@ -26,10 +26,10 @@ export const register = async(req, res)=>{
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn:'7d'});
 
         res.cookie('token', token,{
-            httpOnly: true,//prevent js to access cookie
-            secure: process.env.NODE_ENV === 'production',//use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',//CSRF protection
-            maxAge:7*24*60*60*1000//cookie expiration time
+            httpOnly: true,
+            secure: true, // Required for SameSite: None 
+            sameSite: 'none', // Required for cross-domain (Vercel -> Render)
+            maxAge:7*24*60*60*1000
         })
 
         return res.json({success:true, user: { email:user.email, name: user.name}})
@@ -65,10 +65,10 @@ export const login = async (req, res)=>{
          const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn:'7d'});
 
         res.cookie('token', token,{
-            httpOnly: true,//prevent js to access cookie
-            secure: process.env.NODE_ENV === 'production',//use secure cookie in production
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',//CSRF protection
-            maxAge:7*24*60*60*1000//cookie expiration time
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge:7*24*60*60*1000
         })
 
         return res.json({success:true, user: { email:user.email, name: user.name}})

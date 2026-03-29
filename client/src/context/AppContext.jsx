@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from 'axios';
 
+axios.defaults.baseURL= import.meta.env.VITE_BACKEND_URL;
 axios.defaults.withCredentials = true;
 
-axios.defaults.baseURL= import.meta.env.VITE_BACKEND_URL;
 
 export const AppContext = createContext();
 
@@ -158,7 +158,9 @@ const loadAgentHistory = async () => {
             setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy.ai, your personal grocery assistant. What are you planning to cook or buy today?" }]);
         }
     } catch (error) {
-        console.error("Failed to load history", error);
+        if (error.response?.status !== 401) {
+            console.error("Failed to load history", error);
+        }
         setAgentMessages([{ role: 'assistant', content: "Hi there! I'm Leafy.ai. (Session restored locally)" }]);
     } finally {
         setAgentInitialLoading(false);
