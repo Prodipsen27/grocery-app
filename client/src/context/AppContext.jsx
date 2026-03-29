@@ -2,11 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { dummyProducts } from '../assets/assets';
 import toast from "react-hot-toast";
-import axios from 'axios';
-
-axios.defaults.baseURL= import.meta.env.VITE_BACKEND_URL || '';
-axios.defaults.withCredentials = true;
-
+import API from "../api.js";
 
 export const AppContext = createContext();
 
@@ -35,27 +31,23 @@ export const AppContextProvider = ({children}) =>{
     const cartLoadedFromServer = useRef(false);
 
 // Fetch Seller Status
+
+
 const fetchSeller = async () => {
   try {
-    const { data } = await axios.get('/api/seller/is-auth');
-    if (data.success) {
-      setIsSeller(true);
-    } else {
-      setIsSeller(false);
-    }
+    const { data } = await API.get('/api/seller/is-auth');
+    setIsSeller(data.success);
   } catch (error) {
     setIsSeller(false);
-    // Don't show error toast for 401 - user simply isn't logged in
     if (error.response?.status !== 401) {
       toast.error(error.message);
     }
   }
 };
 
-// Fetch User Auth Status, User Data and Cart Items
 const fetchUser = async () => {
   try {
-    const { data } = await axios.get('/api/user/is-auth');
+    const { data } = await API.get('/api/user/is-auth');
     if (data.success) {
       setUser(data.user);
       cartLoadedFromServer.current = true;
@@ -72,7 +64,7 @@ const fetchUser = async () => {
   // Fetch All Products
 const fetchProducts = async () => {
   try {
-    const { data } = await axios.get('/api/product/list');
+    const { data } = await API.get('/api/product/list');
 
     if (data.success) {
       setProducts(data.products);
@@ -151,7 +143,7 @@ const loadAgentHistory = async () => {
     if(!user) return;
     setAgentInitialLoading(true);
     try {
-        const { data } = await axios.get('/api/agent/history');
+        const { data } = await API.get('/api/agent/history');
         if (data.success && data.history && data.history.length > 0) {
             setAgentMessages(data.history.filter(m => m.role === 'user' || m.role === 'model' || m.role === 'assistant'));
         } else {
@@ -176,7 +168,7 @@ const handleAgentSend = async (message) => {
     setAgentToolCalls([]);
 
     try {
-        const { data } = await axios.post('/api/agent/chat', { message });
+        const { data } = await API.post('/api/agent/chat', { message });
         
         if (data.toolCalls && data.toolCalls.length > 0) {
             setAgentToolCalls(data.toolCalls);
@@ -207,7 +199,7 @@ const handleAgentSend = async (message) => {
     useEffect(()=>{
     const updateCart = async ()=>{
         try {
-            const { data } = await axios.post('/api/cart/update', {cartItems})
+            const { data } = await API.post('/api/cart/update', {cartItems})
             if (!data.success){
                 toast.error(data.message)
             }
@@ -228,7 +220,7 @@ const handleAgentSend = async (message) => {
 },[cartItems])
 
 
-    const value = {navigate, user, setUser, isSeller, setIsSeller,showLogout, setShowLogout,products, currency, addToCart,updateCartItems, removeFromCart, cartItems,showUserLogin , setShowUserLogin, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios, fetchProducts,fetchUser,setCartItems, clearCartLocal, agentMessages, setAgentMessages, agentInput, setAgentInput, agentLoading, agentInitialLoading, agentToolCalls, loadAgentHistory, handleAgentSend, isAgentDrawerOpen, setIsAgentDrawerOpen}
+    const value = {navigate, user, setUser, isSeller, setIsSeller,showLogout, setShowLogout,products, currency, addToCart,updateCartItems, removeFromCart, cartItems,showUserLogin , setShowUserLogin, searchQuery, setSearchQuery, getCartAmount, getCartCount, axios: API, fetchProducts,fetchUser,setCartItems, clearCartLocal, agentMessages, setAgentMessages, agentInput, setAgentInput, agentLoading, agentInitialLoading, agentToolCalls, loadAgentHistory, handleAgentSend, isAgentDrawerOpen, setIsAgentDrawerOpen}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>
