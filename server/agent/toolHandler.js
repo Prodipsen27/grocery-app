@@ -1,6 +1,6 @@
 
-import Product from '../server/models/product.js';
-import User from '../server/models/user.js';
+import Product from '../models/product.js';
+import User from '../models/user.js';
 
 
 

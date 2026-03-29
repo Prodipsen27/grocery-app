@@ -1,6 +1,6 @@
 import express from "express";
 import authUser from "../middleware/authUser.js";
-import { runAgentLoop } from "../../agent/agent.js";
+import { runAgentLoop } from "../agent/agent.js";
 import User from "../models/user.js";
 
 const router = express.Router();
