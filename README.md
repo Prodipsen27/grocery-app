@@ -2,19 +2,20 @@ Here’s your **complete, polished `README.md` in one go** — ready to copy-pas
 
 ---
 
-````markdown
+
 # 🛍️ LeafCart — AI-Powered Grocery Delivery Platform
 
 A full-stack grocery delivery platform with an AI cart agent that understands natural language, searches real products, and manages your cart automatically.
 
 <p align="center">
-  <img src="https://github.com/Prodipsen27/grocery-app/blob/main/client/Leafcart.png" width="700"/>
+  <img src="https://github.com/Prodipsen27/grocery-app/blob/main/client/Leafcart.png?raw=true" alt="LeafCart Banner" width="700"/>
 </p>
 
----
-
-## 🌐 Live Demo
-👉 https://leafcart-tan.vercel.app/
+<p align="center">
+  <a href="https://leafcart-tan.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20App-green?style=for-the-badge" />
+  </a>
+</p>
 
 ---
 
