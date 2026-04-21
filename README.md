@@ -1,9 +1,7 @@
+```
+# 🛍️ LeafCart — AI-Powered Grocery Delivery Platform
 
-# 🛍️ LeafCart : Grocery Website
-
-A modern seller dashboard built with React and Tailwind CSS — manage products, track orders, and monitor store activity.
-
-⚠️ Note: Backend is currently in development. This frontend is powered by dummy data for now.
+A full-stack grocery delivery platform with an AI cart agent that understands natural language, searches real products, and manages your cart automatically.
 
 <p align="center">
   <img src="https://github.com/Prodipsen27/grocery-app/blob/main/client/Leafcart.png" width="700"/>
@@ -12,41 +10,99 @@ A modern seller dashboard built with React and Tailwind CSS — manage products,
 ---
 
 ## 🌐 Live Demo
-
-👉 [Live Demo](https://leafcart.netlify.app/)
+👉 [Live Demo](https://leafcart-tan.vercel.app/)
 
 ---
 
 ## ✨ Features
 
-* 🛒 Seller login and session handling (dummy login)
-* 📦 Add Product & Product List UI pages
-* 📋 Order view with buyer details and payment status
-* 📱 Fully responsive layout using Tailwind CSS
-* 🧠 Context API for global state management
-* 🧪 Dummy order data for frontend preview
+### 🛒 E-Commerce
+* JWT-based user authentication and session handling
+* Product browsing with dynamic filtering and search
+* Cart management and address handling
+* Stripe integration for secure payment processing
+* Seller/admin dashboard for inventory and order management
+* Fully responsive layout using Tailwind CSS
+
+### 🤖 AI Cart Agent (Powered by Gemini)
+* Natural language shopping — just say "I want to cook Palak Paneer"
+* Agent autonomously searches real MongoDB products
+* Adds, removes, and updates cart items intelligently
+* Isolated per-user memory — every user gets their own agent session
+* Built with Gemini function calling (agentic loop architecture)
 
 ---
 
 ## 🚀 Tech Stack
 
-* ⚛️ React (Vite)
-* 🎨 Tailwind CSS
-* 🔁 React Router v6
-* 📦 Context API (AppContext)
-* 🧾 Dummy data (assets/dummyOrders.js)
+| Layer | Tech |
+|-------|------|
+| Frontend | React (Vite), Tailwind CSS, React Router v6 |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| AI Agent | Google Gemini API (function calling) |
+| Auth | JWT, Cookie-based sessions |
+| Payments | Stripe API |
+| Deployment | Vercel (frontend), Railway/Render (backend) |
+
+---
+
+## 🤖 AI Agent Architecture
+
+```
+User: "I want to cook Palak Paneer"
+        ↓
+POST /api/agent/chat
+        ↓
+Gemini reasons → calls search_products("spinach")
+        ↓
+Agent searches real MongoDB catalog
+        ↓
+Gemini calls add_to_cart(product_id, quantity)
+        ↓
+Cart updated in MongoDB for this user
+        ↓
+Gemini replies: "✅ Added 8 ingredients — cart total: ₹370"
+```
+
+### Tools available to the agent:
+* `search_products` — searches MongoDB catalog by name/category
+* `add_to_cart` — adds item to user's cart in DB
+* `remove_from_cart` — removes or reduces cart item
+* `update_quantity` — sets exact quantity for a cart item
+* `get_cart` — reads current cart with product details
+
+---
+
+## 🗺️ AI Agent Roadmap
+
+- [x] Phase 1 — Per-user cart agent with real MongoDB
+- [ ] Phase 2 — User food preferences (veg/nonveg, allergies)
+- [ ] Phase 3 — Order history awareness and reorder suggestions
+- [ ] Phase 4 — Smart recipe and product recommendations
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-src/
-├── assets/         # Icons, images, and dummy data
-├── components/     # Reusable components
-├── context/        # AppContext for global state
-├── pages/          # Login, Orders, and other seller pages
-└── main.jsx        # App entry point
+LeafCart/
+├── client/               # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── main.jsx
+├── server/               # Express backend
+│   ├── agent/            # AI agent (Gemini)
+│   │   ├── agent.js
+│   │   ├── tools.js
+│   │   └── toolHandlers.js
+│   ├── configs/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
 ```
 
 ---
@@ -54,58 +110,47 @@ src/
 ## 🧪 Local Development
 
 Clone the repo:
-
 ```bash
 git clone https://github.com/Prodipsen27/grocery-app.git
 cd grocery-app
 ```
 
 Install dependencies:
-
 ```bash
-npm install
+# Backend
+cd server && npm install
+
+# Frontend
+cd client && npm install
+```
+
+Set up environment variables in `server/.env`:
+```
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_key
+GEMINI_API_KEY=your_gemini_key
 ```
 
 Run the development server:
-
 ```bash
-npm run dev
+# Backend
+cd server && nodemon server.js
+
+# Frontend
+cd client && npm run dev
 ```
-
-Visit:
-
-```
-http://localhost:5173
-```
-
----
-
-## 🛠 Backend Status
-
-* 🔧 Backend APIs are in progress
-* 🗂 Currently using static dummyOrders for simulation
-* 🔐 Authentication and product CRUD will be supported soon
-
----
-
-## 🤝 Contributing
-
-Have suggestions or want to contribute?
-
-* Fork the repo
-* Create a new branch
-* Submit a Pull Request
-
-Backend collaboration is also welcome!
 
 ---
 
 ## 📌 Project Status
 
-* ✅ UI: Fully built with dummy data
-* 🟡 Backend: Under construction
+* ✅ Frontend: Complete
+* ✅ Backend: Complete
+* ✅ AI Agent Phase 1: Complete
+* 🟡 AI Agent Phase 2-4: In Progress
 * 📱 Responsive: Yes
-* 🧪 Dummy Data Enabled: Yes
+* 🔐 Auth: JWT + Cookies
 
 ---
 
@@ -113,5 +158,4 @@ Backend collaboration is also welcome!
 
 Built with 💚 by Prodip
 GitHub: [@Prodipsen27](https://github.com/Prodipsen27)
-
----
+```
