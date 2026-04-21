@@ -49,21 +49,22 @@ A full-stack grocery delivery platform with an AI cart agent that understands na
 
 ## 🤖 AI Agent Architecture
 
-```
+```text
 User: "I want to cook Palak Paneer"
         ↓
 POST /api/agent/chat
         ↓
-Gemini reasons → calls search_products("spinach")
+Gemini reasoning
         ↓
-Agent searches real MongoDB catalog
+search_products("spinach")
         ↓
-Gemini calls add_to_cart(product_id, quantity)
+MongoDB product search
         ↓
-Cart updated in MongoDB for this user
+add_to_cart(product_id, quantity)
         ↓
-Gemini replies: "✅ Added 8 ingredients — cart total: ₹370"
-```
+Cart updated in DB
+        ↓
+Response: "✅ Added 8 ingredients — total ₹370"
 
 ### Tools available to the agent:
 * `search_products` — searches MongoDB catalog by name/category
@@ -85,25 +86,25 @@ Gemini replies: "✅ Added 8 ingredients — cart total: ₹370"
 
 ## 📁 Folder Structure
 
-```
 LeafCart/
-├── client/               # React frontend
+├── client/                # React frontend
 │   ├── src/
 │   │   ├── components/
 │   │   ├── context/
 │   │   ├── pages/
 │   │   └── main.jsx
-├── server/               # Express backend
-│   ├── agent/            # AI agent (Gemini)
+│
+├── server/                # Express backend
+│   ├── agent/             # AI agent (Gemini)
 │   │   ├── agent.js
 │   │   ├── tools.js
 │   │   └── toolHandlers.js
+│   │
 │   ├── configs/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
 │   └── server.js
-```
 
 ---
 
@@ -158,4 +159,12 @@ cd client && npm run dev
 
 Built with 💚 by Prodip
 GitHub: [@Prodipsen27](https://github.com/Prodipsen27)
+
+Future Enhancements
+Personalized shopping based on user preferences
+Smart reorder system using order history
+AI-powered recipe recommendations
+Voice-based shopping assistant
+Multi-language support
 ```
+
