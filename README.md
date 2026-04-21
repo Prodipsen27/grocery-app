@@ -1,4 +1,8 @@
-```
+Here’s your **complete, polished `README.md` in one go** — ready to copy-paste:
+
+---
+
+````markdown
 # 🛍️ LeafCart — AI-Powered Grocery Delivery Platform
 
 A full-stack grocery delivery platform with an AI cart agent that understands natural language, searches real products, and manages your cart automatically.
@@ -10,40 +14,40 @@ A full-stack grocery delivery platform with an AI cart agent that understands na
 ---
 
 ## 🌐 Live Demo
-👉 [Live Demo](https://leafcart-tan.vercel.app/)
+👉 https://leafcart-tan.vercel.app/
 
 ---
 
 ## ✨ Features
 
 ### 🛒 E-Commerce
-* JWT-based user authentication and session handling
-* Product browsing with dynamic filtering and search
-* Cart management and address handling
-* Stripe integration for secure payment processing
-* Seller/admin dashboard for inventory and order management
-* Fully responsive layout using Tailwind CSS
+- JWT-based user authentication and session handling  
+- Product browsing with dynamic filtering and search  
+- Cart management and address handling  
+- Secure payments via Stripe integration  
+- Seller/Admin dashboard for inventory and order management  
+- Fully responsive UI using Tailwind CSS  
 
 ### 🤖 AI Cart Agent (Powered by Gemini)
-* Natural language shopping — just say "I want to cook Palak Paneer"
-* Agent autonomously searches real MongoDB products
-* Adds, removes, and updates cart items intelligently
-* Isolated per-user memory — every user gets their own agent session
-* Built with Gemini function calling (agentic loop architecture)
+- Natural language shopping (e.g., *"I want to cook Palak Paneer"*)  
+- Autonomous product search from real MongoDB catalog  
+- Intelligent cart operations (add, remove, update items)  
+- Per-user isolated memory (session-aware agent)  
+- Built using Gemini function calling (agentic loop architecture)  
 
 ---
 
 ## 🚀 Tech Stack
 
-| Layer | Tech |
-|-------|------|
-| Frontend | React (Vite), Tailwind CSS, React Router v6 |
-| Backend | Node.js, Express.js |
-| Database | MongoDB, Mongoose |
-| AI Agent | Google Gemini API (function calling) |
-| Auth | JWT, Cookie-based sessions |
-| Payments | Stripe API |
-| Deployment | Vercel (frontend), Railway/Render (backend) |
+| Layer        | Technology |
+|-------------|-----------|
+| Frontend     | React (Vite), Tailwind CSS, React Router v6 |
+| Backend      | Node.js, Express.js |
+| Database     | MongoDB, Mongoose |
+| AI Agent     | Google Gemini API (Function Calling) |
+| Auth         | JWT, Cookie-based Sessions |
+| Payments     | Stripe API |
+| Deployment   | Vercel (Frontend), Railway/Render (Backend) |
 
 ---
 
@@ -65,27 +69,30 @@ add_to_cart(product_id, quantity)
 Cart updated in DB
         ↓
 Response: "✅ Added 8 ingredients — total ₹370"
+````
 
-### Tools available to the agent:
-* `search_products` — searches MongoDB catalog by name/category
-* `add_to_cart` — adds item to user's cart in DB
-* `remove_from_cart` — removes or reduces cart item
-* `update_quantity` — sets exact quantity for a cart item
-* `get_cart` — reads current cart with product details
+### 🧠 Available Agent Tools
+
+* `search_products` → Search catalog by name/category
+* `add_to_cart` → Add item to user cart
+* `remove_from_cart` → Remove or decrement item
+* `update_quantity` → Set exact quantity
+* `get_cart` → Fetch full cart with product details
 
 ---
 
 ## 🗺️ AI Agent Roadmap
 
-- [x] Phase 1 — Per-user cart agent with real MongoDB
-- [ ] Phase 2 — User food preferences (veg/nonveg, allergies)
-- [ ] Phase 3 — Order history awareness and reorder suggestions
-- [ ] Phase 4 — Smart recipe and product recommendations
+* [x] Phase 1 — Per-user cart agent with real MongoDB
+* [ ] Phase 2 — User preferences (veg/non-veg, allergies)
+* [ ] Phase 3 — Order history awareness and reorder suggestions
+* [ ] Phase 4 — Smart recipe and product recommendations
 
 ---
 
 ## 📁 Folder Structure
 
+```bash
 LeafCart/
 ├── client/                # React frontend
 │   ├── src/
@@ -105,41 +112,52 @@ LeafCart/
 │   ├── models/
 │   ├── routes/
 │   └── server.js
+```
 
 ---
 
 ## 🧪 Local Development
 
-Clone the repo:
+### 1️⃣ Clone the repo
+
 ```bash
 git clone https://github.com/Prodipsen27/grocery-app.git
 cd grocery-app
 ```
 
-Install dependencies:
+### 2️⃣ Install dependencies
+
 ```bash
 # Backend
-cd server && npm install
+cd server
+npm install
 
 # Frontend
-cd client && npm install
+cd ../client
+npm install
 ```
 
-Set up environment variables in `server/.env`:
-```
+### 3️⃣ Setup environment variables
+
+Create `server/.env`:
+
+```env
 MONGODB_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 STRIPE_SECRET_KEY=your_stripe_key
 GEMINI_API_KEY=your_gemini_key
 ```
 
-Run the development server:
+### 4️⃣ Run the project
+
 ```bash
 # Backend
-cd server && nodemon server.js
+cd server
+nodemon server.js
 
 # Frontend
-cd client && npm run dev
+cd client
+npm run dev
 ```
 
 ---
@@ -149,7 +167,7 @@ cd client && npm run dev
 * ✅ Frontend: Complete
 * ✅ Backend: Complete
 * ✅ AI Agent Phase 1: Complete
-* 🟡 AI Agent Phase 2-4: In Progress
+* 🟡 AI Agent Phase 2–4: In Progress
 * 📱 Responsive: Yes
 * 🔐 Auth: JWT + Cookies
 
@@ -157,14 +175,19 @@ cd client && npm run dev
 
 ## 🧑‍💻 Author
 
-Built with 💚 by Prodip
-GitHub: [@Prodipsen27](https://github.com/Prodipsen27)
+**Prodip**
+GitHub: [https://github.com/Prodipsen27](https://github.com/Prodipsen27)
 
-Future Enhancements
-Personalized shopping based on user preferences
-Smart reorder system using order history
-AI-powered recipe recommendations
-Voice-based shopping assistant
-Multi-language support
-```
+---
+
+## 💡 Future Enhancements
+
+* Personalized shopping based on user preferences
+* Smart reorder system using order history
+* AI-powered recipe recommendations
+* Voice-based shopping assistant
+* Multi-language support
+
+---
+
 
